@@ -1,0 +1,5 @@
+<!-- Favicon SVG - Ícone que aparece na aba do navegador -->
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" fill="#2c3e50" rx="4"/>
+  <text x="50%" y="65%" font-family="Arial, sans-serif" font-size="18" fill="#3498db" text-anchor="middle" font-weight="bold">R$</text>
+</svg>

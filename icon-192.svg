@@ -1,0 +1,6 @@
+<!-- Ícone simples para PWA - 192x192 -->
+<svg width="192" height="192" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" fill="#2c3e50"/>
+  <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="80" fill="#3498db" text-anchor="middle" dominant-baseline="middle" font-weight="bold">R$</text>
+  <text x="50%" y="75%" font-family="Arial, sans-serif" font-size="24" fill="#ecf0f1" text-anchor="middle" dominant-baseline="middle">Gestão</text>
+</svg>

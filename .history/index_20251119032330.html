@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Gestão">
+    <title>Sistema de Gestão Financeira e Orçamentos</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2c3e50">
+    <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <img id="logoPreview" src="" alt="Logo" class="logo-img" style="display: none;">
+                <h2 id="empresaNome">Minha Empresa</h2>
+                <p id="empresaCnpj" class="cnpj"></p>
+            </div>
+            <nav class="menu">
+                <button class="menu-item active" data-page="dashboard">
+                    <span class="icon">📊</span> Dashboard
+                </button>
+                <button class="menu-item" data-page="financeiro">
+                    <span class="icon">💰</span> Financeiro
+                </button>
+                <button class="menu-item" data-page="orcamentos">
+                    <span class="icon">📋</span> Orçamentos
+                </button>
+                <button class="menu-item" data-page="clientes">
+                    <span class="icon">👥</span> Clientes
+                </button>
+                <button class="menu-item" data-page="produtos">
+                    <span class="icon">📦</span> Produtos
+                </button>
+                <button class="menu-item" data-page="configuracoes">
+                    <span class="icon">⚙️</span> Configurações
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboard-page" class="page active">
+                <h1>Dashboard Financeiro</h1>
+                
+                <div class="cards-grid">
+                    <div class="card card-success">
+                        <h3>Saldo em Conta</h3>
+                        <p class="card-value" id="saldoAtual">R$ 0,00</p>
+                        <small>Saldo atual</small>
+                    </div>
+                    <div class="card card-danger">
+                        <h3>Saídas da Conta</h3>
+                        <p class="card-value" id="saidasConta">R$ 0,00</p>
+                        <small>Confirmadas</small>
+                    </div>
+                    <div class="card card-warning">
+                        <h3>Saldo Devedor</h3>
+                        <p class="card-value" id="saldoDevedor">R$ 0,00</p>
+                        <small>Pendente</small>
+                    </div>
+                    <div class="card card-info">
+                        <h3>A Receber</h3>
+                        <p class="card-value" id="saldoReceber">R$ 0,00</p>
+                        <small>Pendente</small>
+                    </div>
+                    <div class="card card-alert">
+                        <h3>Saldo Atrasado</h3>
+                        <p class="card-value" id="saldoAtrasado">R$ 0,00</p>
+                        <small>Vencidos</small>
+                    </div>
+                    <div class="card card-primary">
+                        <h3>Orçamentos</h3>
+                        <p class="card-value" id="totalOrcamentos">0</p>
+                        <small>Total cadastrados</small>
+                    </div>
+                </div>
+
+                <div class="dashboard-charts">
+                    <div class="card">
+                        <h3>Últimos Lançamentos</h3>
+                        <div id="ultimosLancamentos" class="lancamentos-list"></div>
+                    </div>
+                    <div class="card">
+                        <h3>Orçamentos Pendentes</h3>
+                        <div id="orcamentosPendentes" class="orcamentos-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financeiro Page -->
+            <div id="financeiro-page" class="page">
+                <div class="page-header">
+                    <h1>Controle Financeiro</h1>
+                    <button class="btn btn-primary" id="btnNovoLancamento">+ Novo Lançamento</button>
+                </div>
+
+                <div class="saldo-section">
+                    <label>Saldo Inicial da Conta:</label>
+                    <input type="number" id="saldoInicial" step="0.01" placeholder="0,00">
+                </div>
+
+                <div class="table-container">
+                    <table id="tabelaFinanceiro">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Valor</th>
+                                <th>Vencimento</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaLancamentos"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Orçamentos Page -->
+            <div id="orcamentos-page" class="page">
+                <div class="page-header">
+                    <h1>Orçamentos</h1>
+                    <button class="btn btn-primary" id="btnNovoOrcamento">+ Novo Orçamento</button>
+                </div>
+
+                <div class="table-container">
+                    <table id="tabelaOrcamentos">
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Data</th>
+                                <th>Cliente</th>
+                                <th>Valor Total</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaOrcamentos"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Clientes Page -->
+            <div id="clientes-page" class="page">
+                <div class="page-header">
+                    <h1>Clientes</h1>
+                    <button class="btn btn-primary" id="btnNovoCliente">+ Novo Cliente</button>
+                </div>
+
+                <div class="table-container">
+                    <table id="tabelaClientes">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>CPF/CNPJ</th>
+                                <th>Telefone</th>
+                                <th>Email</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaClientes"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Produtos Page -->
+            <div id="produtos-page" class="page">
+                <div class="page-header">
+                    <h1>Produtos/Serviços</h1>
+                    <button class="btn btn-primary" id="btnNovoProduto">+ Novo Produto</button>
+                </div>
+
+                <div class="table-container">
+                    <table id="tabelaProdutos">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Preço Custo</th>
+                                <th>Preço Venda</th>
+                                <th>Margem</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaProdutos"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Configurações Page -->
+            <div id="configuracoes-page" class="page">
+                <h1>Configurações</h1>
+                
+                <div class="config-section">
+                    <h3>Dados da Empresa</h3>
+                    <div class="form-group">
+                        <label>Nome da Empresa:</label>
+                        <input type="text" id="configNome" placeholder="Minha Empresa">
+                    </div>
+                    <div class="form-group">
+                        <label>CNPJ:</label>
+                        <input type="text" id="configCnpj" placeholder="00.000.000/0000-00">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone:</label>
+                        <input type="text" id="configTelefone" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="configEmail" placeholder="contato@empresa.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Endereço:</label>
+                        <textarea id="configEndereco" placeholder="Rua, número, bairro, cidade - UF"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Logo da Empresa:</label>
+                        <input type="file" id="configLogo" accept="image/*">
+                        <img id="configLogoPreview" src="" alt="" style="display: none; max-width: 200px; margin-top: 10px;">
+                    </div>
+                    <button class="btn btn-success" id="btnSalvarConfig">Salvar Configurações</button>
+                </div>
+
+                <div class="config-section">
+                    <h3>Backup e Dados</h3>
+                    <button class="btn btn-info" id="btnExportarDados">💾 Exportar Dados (JSON)</button>
+                    <button class="btn btn-success" id="btnCompartilharDados">📤 Compartilhar Backup</button>
+                    <button class="btn btn-warning" id="btnImportarDados">📥 Importar Dados</button>
+                    <button class="btn btn-primary" id="btnImportarExcel">📊 Importar do Excel</button>
+                    <button class="btn btn-success" id="btnExportarFinanceiro">📊 Exportar Financeiro (CSV)</button>
+                    <button class="btn btn-primary" id="btnCarregarPlanilha">📋 Carregar Planilha Existente</button>
+                    <input type="file" id="inputImportarDados" accept=".json" style="display: none;">
+                    <input type="file" id="inputImportarExcel" accept=".xlsx,.xls,.csv" style="display: none;">
+                    <div style="margin-top: 15px; padding: 15px; background-color: #e8f4f8; border-radius: 6px;">
+                        <small>
+                            <strong>💡 Dica:</strong> Use "Compartilhar Backup" para enviar seus dados via WhatsApp, email, etc. 
+                            Depois importe no outro dispositivo para sincronizar!<br><br>
+                            <strong>📊 Importar Excel:</strong> Faça upload da sua planilha de controle financeiro (.xlsx ou .csv)
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Lançamento -->
+    <div id="modalLancamento" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Novo Lançamento</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Data:</label>
+                    <input type="date" id="lancamentoData">
+                </div>
+                <div class="form-group">
+                    <label>Descrição:</label>
+                    <input type="text" id="lancamentoDescricao" placeholder="Descrição do lançamento">
+                </div>
+                <div class="form-group">
+                    <label>Categoria:</label>
+                    <select id="lancamentoCategoria">
+                        <option value="Devo">Devo</option>
+                        <option value="A receber">A receber</option>
+                        <option value="Débito">Débito</option>
+                        <option value="Pix">Pix</option>
+                        <option value="Crédito">Crédito</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Valor:</label>
+                    <input type="number" id="lancamentoValor" step="0.01" placeholder="0,00">
+                </div>
+                <div class="form-group">
+                    <label>Vencimento:</label>
+                    <input type="date" id="lancamentoVencimento">
+                </div>
+                <div class="form-group">
+                    <label>Status:</label>
+                    <select id="lancamentoStatus">
+                        <option value="Pendente">Pendente</option>
+                        <option value="Confirmado">Confirmado</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCancelarLancamento">Cancelar</button>
+                <button class="btn btn-primary" id="btnSalvarLancamento">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cliente -->
+    <div id="modalCliente" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Novo Cliente</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nome:</label>
+                    <input type="text" id="clienteNome" placeholder="Nome completo">
+                </div>
+                <div class="form-group">
+                    <label>CPF/CNPJ:</label>
+                    <input type="text" id="clienteDoc" placeholder="000.000.000-00">
+                </div>
+                <div class="form-group">
+                    <label>Telefone:</label>
+                    <input type="text" id="clienteTelefone" placeholder="(00) 00000-0000">
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="clienteEmail" placeholder="cliente@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Endereço:</label>
+                    <textarea id="clienteEndereco" placeholder="Endereço completo"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCancelarCliente">Cancelar</button>
+                <button class="btn btn-primary" id="btnSalvarCliente">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Produto -->
+    <div id="modalProduto" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Novo Produto</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Código:</label>
+                    <input type="text" id="produtoCodigo" placeholder="Código do produto">
+                </div>
+                <div class="form-group">
+                    <label>Descrição:</label>
+                    <input type="text" id="produtoDescricao" placeholder="Descrição do produto/serviço">
+                </div>
+                <div class="form-group">
+                    <label>Preço de Custo:</label>
+                    <input type="number" id="produtoCusto" step="0.01" placeholder="0,00">
+                </div>
+                <div class="form-group">
+                    <label>Preço de Venda:</label>
+                    <input type="number" id="produtoVenda" step="0.01" placeholder="0,00">
+                </div>
+                <div class="form-group">
+                    <label>Unidade:</label>
+                    <input type="text" id="produtoUnidade" placeholder="UN, KG, M², etc">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCancelarProduto">Cancelar</button>
+                <button class="btn btn-primary" id="btnSalvarProduto">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Orçamento -->
+    <div id="modalOrcamento" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Novo Orçamento</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Data:</label>
+                        <input type="date" id="orcamentoData">
+                    </div>
+                    <div class="form-group">
+                        <label>Cliente:</label>
+                        <select id="orcamentoCliente">
+                            <option value="">Selecione um cliente</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Observações:</label>
+                    <textarea id="orcamentoObs" placeholder="Observações do orçamento"></textarea>
+                </div>
+                
+                <h3>Itens do Orçamento</h3>
+                <div class="orcamento-itens">
+                    <div class="form-row">
+                        <select id="itemProduto" class="flex-2">
+                            <option value="">Selecione um produto</option>
+                        </select>
+                        <input type="number" id="itemQuantidade" placeholder="Qtd" step="0.01" class="flex-1">
+                        <input type="number" id="itemPreco" placeholder="Preço" step="0.01" class="flex-1">
+                        <button class="btn btn-small btn-success" id="btnAdicionarItem">+</button>
+                    </div>
+                    <table id="tabelaItensOrcamento">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Preço Unit.</th>
+                                <th>Total</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaItensOrcamento"></tbody>
+                    </table>
+                    <div class="orcamento-total">
+                        <strong>Total do Orçamento: R$ <span id="orcamentoTotal">0,00</span></strong>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCancelarOrcamento">Cancelar</button>
+                <button class="btn btn-primary" id="btnSalvarOrcamento">Salvar Orçamento</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Visualizar Orçamento -->
+    <div id="modalVisualizarOrcamento" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Orçamento #<span id="viewOrcNumero"></span></h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="orcamentoImpressao" class="orcamento-impressao">
+                    <!-- Conteúdo será gerado dinamicamente -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" id="btnImprimirOrcamento">Imprimir</button>
+                <button class="btn btn-success" id="btnAprovarOrcamento">Aprovar e Lançar no Financeiro</button>
+                <button class="btn btn-danger" id="btnExcluirOrcamento">Excluir</button>
+                <button class="btn btn-secondary" id="btnFecharVisualizacao">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

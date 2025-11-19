@@ -1,0 +1,7 @@
+<!-- Ícone simples para PWA - 512x512 -->
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#2c3e50" rx="80"/>
+  <text x="50%" y="45%" font-family="Arial, sans-serif" font-size="220" fill="#3498db" text-anchor="middle" dominant-baseline="middle" font-weight="bold">R$</text>
+  <text x="50%" y="70%" font-family="Arial, sans-serif" font-size="60" fill="#ecf0f1" text-anchor="middle" dominant-baseline="middle" font-weight="600">GESTÃO</text>
+  <text x="50%" y="80%" font-family="Arial, sans-serif" font-size="32" fill="#95a5a6" text-anchor="middle" dominant-baseline="middle">Financeiro</text>
+</svg>

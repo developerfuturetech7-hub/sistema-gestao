@@ -1,0 +1,43 @@
+﻿Saldo inicial da conta;1704,34;;;;;;;;;
+Saldo em conta (atual);#REF!;;;;;;;;;
+Saídas da conta (confirmadas);#REF!;;;;;;;;;
+Saldo devedor (pendente);#REF!;;;;;;;;;
+Saldo a receber (pendente);#REF!;;;;;;;;;
+Saldo atrasado (pendente e vencido);#REF!;;;;;;;;;
+;;;;;;;;;;
+Coluna1;Coluna2;Coluna3;Coluna4;Coluna5;Coluna6;Coluna7;Coluna8;Coluna9;Coluna10;Coluna11
+;;;;;;;;;;
+;;;;;;;;;;
+;;;;;;;;;;
+;;;;;;;;;;
+Data;Descrição;Categoria;Valor;Vencimento;Status;Entrada_confirmada;Saida_confirmada;Devedor_pendente;Receber_pendente;Atrasado
+;Peça Dell;Devo;350;;Pendente;0;0;350;0;0
+;iPhone comprado;Devo;7000;;Pendente;0;0;7000;0;0
+;Construmar boleto;Devo;58,17;;Pendente;0;0;58,17;0;0
+;Construmar boleto;Devo;74,79;;Pendente;0;0;74,79;0;0
+;iPhone a vender;A receber;5000;;Pendente;0;0;0;5000;0
+;Poliana (200+280+250);A receber;730;;Pendente;0;0;0;730;0
+;Jaqueline Joias;A receber;500;;Pendente;0;0;0;500;0
+;Starlink;A receber;150;;Pendente;0;0;0;150;0
+;Eduardo notebook;A receber;350;;Pendente;0;0;0;350;0
+;Sistema programação (1/10);A receber;2000;;Pendente;0;0;0;2000;0
+;Ferramenta programação;A receber;347,35;;Pendente;0;0;0;347,35;0
+;GitHub;A receber;50;;Pendente;0;0;0;50;0
+;Tokens IA;A receber;23,71;;Pendente;0;0;0;23,71;0
+;Braw celular;A receber;450;;Pendente;0;0;0;450;0
+;Funcionário Malibu;A receber;180;;Pendente;0;0;0;180;0
+;Marcelo Memória RAM;A receber;250;;Pendente;0;0;0;250;0
+;Fib Park;A receber;9,7;;Confirmado;9,7;0;0;0;0
+;Power Tech;A receber;50;;Pendente;0;0;0;50;0
+;Antonio Ferreira;A receber;80;;Pendente;0;0;0;80;0
+;Antonio de Oliveira Silva;A receber;1530;;Pendente;0;0;0;1530;0
+;Hub Sis;A receber;30;;Pendente;0;0;0;30;0
+;Primavia;A receber;152,85;;Pendente;0;0;0;152,85;0
+;Isis Dutra;A receber;60;;Pendente;0;0;0;60;0
+;Silvino Informática;A receber;55;;Pendente;0;0;0;55;0
+;Estela Medicamentos;A receber;88;;Pendente;0;0;0;88;0
+;Selbeti serviço a fazer;A receber;500;;Pendente;0;0;0;500;0
+;PC vendido;Crédito;900;;Confirmado;900;900;0;0;0
+;Outro PC vendido;Crédito;1500;;Pendente;0;0;0;0;0
+;PIX Cliente;Pix;300;;Confirmado;300;0;0;0;0
+;Débito mercado;Débito;200;;Confirmado;0;200;0;0;0
